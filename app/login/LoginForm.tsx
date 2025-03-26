@@ -49,7 +49,7 @@ function SubmitButton() {
       disabled={pending}
       className="w-full bg-blue-500 text-white p-2 rounded"
     >
-      {pending ? "Logging..." : "Login"}
+      {pending ? "Submitting..." : "Login"}
     </button>
   );
 }

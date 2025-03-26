@@ -6,10 +6,7 @@ import { cookies } from "next/headers";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).trim(),
-  password: z
-    .string()
-    .min(8, { message: "Password must be at least 8 characters" })
-    .trim(),
+  password: z.string().trim(),
 });
 
 export async function login(prevState: any, formData: FormData) {
@@ -47,7 +44,7 @@ export async function login(prevState: any, formData: FormData) {
     httpOnly: true,
   });
 
-  redirect("/overview");
+  redirect("/dashboard");
 }
 
 export async function logout() {
