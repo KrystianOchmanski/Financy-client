@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { login } from "./actions";
+import Link from "next/link";
 
 export default function LoginForm() {
   const [state, loginAction] = useActionState(login, undefined);
@@ -10,8 +11,6 @@ export default function LoginForm() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-6 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-4 text-center">Logowanie</h2>
-
         <form action={loginAction}>
           <div className="mb-4">
             <label className="block mb-1 font-medium">Email</label>
@@ -35,6 +34,12 @@ export default function LoginForm() {
 
           <SubmitButton />
         </form>
+        <Link
+          href={"/register"}
+          className="underline text-blue-600 block text-center pt-2"
+        >
+          Register
+        </Link>
       </div>
     </div>
   );

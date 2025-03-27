@@ -24,7 +24,6 @@ export async function login(prevState: any, formData: FormData) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
-    credentials: "include",
   });
 
   if (!response.ok) {
@@ -35,19 +34,28 @@ export async function login(prevState: any, formData: FormData) {
     };
   }
 
-  console.log(response);
+  const { accessToken, refreshToken } = await response.json();
 
-  const { accessToken } = await response.json();
-
-  (await cookies()).set("accessToken", accessToken, {
-    secure: true,
+  const cookieStore = await cookies();
+  cookieStore.set("accessToken", accessToken, {
     httpOnly: true,
+    secure: true,
+    sameSite: "lax",
+  });
+  cookieStore.set("refreshToken", refreshToken, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "lax",
   });
 
   redirect("/dashboard");
 }
 
 export async function logout() {
-  // to do LOGIC
+  const cookieStore = await cookies();
+
+  cookieStore.delete("accessToken");
+  cookieStore.delete("refreshToken");
+
   redirect("/login");
 }

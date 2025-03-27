@@ -1,0 +1,98 @@
+"use client";
+
+import { useActionState, useEffect } from "react";
+import { useFormStatus } from "react-dom";
+import { register } from "./action";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+export default function RegisterForm() {
+  const router = useRouter();
+  const [state, registerAction] = useActionState(register, undefined);
+
+  useEffect(() => {
+    if (state?.redirect) {
+      setTimeout(() => {
+        router.push(state.redirect);
+      }, 1000);
+    }
+  }, [state?.redirect, router]);
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="bg-white p-6 rounded-lg shadow-md w-96">
+        <form action={registerAction}>
+          <div className="mb-4">
+            <label className="block mb-1 font-medium">Name</label>
+            <input name="firstName" className="w-full p-2 border rounded" />
+          </div>
+          {state?.errors?.firstName && (
+            <p className="text-red-500">{state.errors.firstName}</p>
+          )}
+
+          <div className="mb-4">
+            <label className="block mb-1 font-medium">Email</label>
+            <input name="email" className="w-full p-2 border rounded" />
+          </div>
+          {state?.errors?.email && (
+            <p className="text-red-500">{state.errors.email[0]}</p>
+          )}
+
+          <div className="mb-4">
+            <label className="block mb-1 font-medium">Password</label>
+            <input
+              type="password"
+              name="password"
+              className="w-full p-2 border rounded"
+            />
+          </div>
+
+          {state?.errors?.password && (
+            <>
+              <p className="text-red-500">Password must:</p>
+              {state.errors.password.map((error: string, index: number) => (
+                <p key={index} className="text-red-500">
+                  - {error}
+                </p>
+              ))}
+            </>
+          )}
+
+          {state?.errors?.general && (
+            <div className="text-red-500">
+              {state.errors.general.map((error: string, index: number) => (
+                <p key={index}>{error}</p>
+              ))}
+            </div>
+          )}
+
+          {state?.success && (
+            <p className="text-center text-green-600">{state.success}</p>
+          )}
+
+          <SubmitButton />
+        </form>
+        <Link
+          href={"/login"}
+          className="underline text-blue-600 block text-center pt-2"
+        >
+          Login
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      className="w-full bg-blue-500 text-white p-2 rounded"
+    >
+      {pending ? "Submitting..." : "Register"}
+    </button>
+  );
+}
