@@ -1,18 +1,26 @@
 import Link from "next/link";
 import { logout } from "../login/actions";
+import MenuItem from "./MenuItem";
 
 export default function Navbar() {
   return (
-    <nav className="bg-blue-500 p-4">
-      <div className="container mx-auto flex justify-between">
-        <Link href="/" className="text-white text-xl font-bold">
-          Financy
+    <nav className="bg-white stroke-1 stroke-gray-100">
+      <div className="container mx-auto flex justify-between lg:w-7xl py-4 px-8">
+        <Link href="/" className="my-auto">
+          <img src="/logo_full.png" alt="Logo" />
         </Link>
+        <menu className="my-auto">
+          <MenuItem href="/dashboard" label="Dashboard" />
+          <MenuItem href="/transactions" label="Transactions" />
+          <MenuItem href="/analytics" label="Analytics" />
+          <MenuItem href="/accounts" label="Accounts" />
+          <MenuItem href="/wallet" label="Wallet" />
+        </menu>
         <span className="ml-3 hidden sm:block">
           <button
             onClick={logout}
             type="button"
-            className="rounded-md bg-white px-3 py-2 text-sm text-red-500 hover:bg-gray-200"
+            className="rounded-md bg-white px-3 py-2 text-xs lg:text-sm text-red-500 hover:bg-gray-200"
           >
             Log out
           </button>
