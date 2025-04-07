@@ -1,8 +1,18 @@
 import Link from "next/link";
-import { logout } from "../login/actions";
 import MenuItem from "./MenuItem";
+import { useAuth } from "../hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
+  const { clearAccessToken } = useAuth();
+  const router = useRouter();
+
+  const logout = async () => {
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/logout`);
+    clearAccessToken();
+    router.push("/login");
+  };
+
   return (
     <nav className="bg-white stroke-1 stroke-gray-100">
       <div className="container mx-auto flex justify-between lg:w-7xl py-4 px-8">

@@ -1,0 +1,32 @@
+import { z } from "zod";
+
+export const loginSchema = z.object({
+  email: z.string().email({ message: "Invalid email address" }).trim(),
+  password: z.string().trim(),
+});
+
+export const registerSchema = z.object({
+  firstName: z
+    .string()
+    .trim()
+    .max(30, { message: "Name must be at most 30 characters long." })
+    .regex(/^[A-Za-z]+$/, { message: "Name can only contain letters." }),
+  email: z.string().email({ message: "Invalid email address" }).trim(),
+  password: z
+    .string()
+    .trim()
+    .min(6, { message: "be at least 6 characters long." })
+    .regex(/[!@#$%^&*(),.?":{}|<>]/, {
+      message: "have at least one special character.",
+    })
+    .regex(/\d/, { message: "have at least one digit (0-9)." })
+    .regex(/[a-z]/, {
+      message: "have at least one lowercase letter (a-z).",
+    })
+    .regex(/[A-Z]/, {
+      message: "have at least one uppercase letter (A-Z).",
+    })
+    .refine((password) => new Set(password).size > 1, {
+      message: "use at least 1 different character.",
+    }),
+});

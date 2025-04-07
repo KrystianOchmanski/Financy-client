@@ -1,13 +1,8 @@
 "use server";
 
-import { z } from "zod";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-
-const loginSchema = z.object({
-  email: z.string().email({ message: "Invalid email address" }).trim(),
-  password: z.string().trim(),
-});
+import { loginSchema } from "@/app/lib/definitions";
 
 export async function login(prevState: any, formData: FormData) {
   const result = loginSchema.safeParse(Object.fromEntries(formData));
@@ -45,13 +40,4 @@ export async function login(prevState: any, formData: FormData) {
   });
 
   return { accessToken };
-}
-
-export async function logout() {
-  const cookieStore = await cookies();
-
-  cookieStore.delete("accessToken");
-  cookieStore.delete("refreshToken");
-
-  redirect("/login");
 }
