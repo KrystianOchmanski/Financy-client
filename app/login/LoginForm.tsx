@@ -1,12 +1,24 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
 import { login } from "./actions";
 import Link from "next/link";
+import { useAuth } from "../hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
   const [state, loginAction] = useActionState(login, undefined);
+  const { setAccessToken } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state?.accessToken) {
+      // Saving token in memory and redirect
+      setAccessToken(state.accessToken);
+      router.push("/dashboard");
+    }
+  }, [state?.accessToken]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">

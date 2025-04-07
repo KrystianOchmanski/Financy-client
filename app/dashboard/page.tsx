@@ -1,4 +1,8 @@
-import api from "../api/api";
+"use client";
+
+import { useState } from "react";
+import api from "../lib/api";
+import { useAuth } from "../hooks/useAuth";
 
 interface Transaction {
   id: number;
@@ -19,17 +23,37 @@ interface Account {
   transactions: Transaction[];
 }
 
-export default async function Dashboard() {
-  // const accounts = (await api.get("account")).data as Account[];
+export default function Dashboard() {
+  const [balance, setBalance] = useState(0);
+  const { clearAccessToken } = useAuth();
 
-  // const totalBalance = accounts.reduce(
-  //   (sum, account) => sum + account.balance,
-  //   0
-  // );
+  const getBalance = async () => {
+    const response = await api.get("/account");
+    const accounts = response.data as Account[];
+
+    const totalBalance = accounts.reduce(
+      (prev, next) => prev + next.balance,
+      0
+    );
+
+    setBalance(totalBalance);
+  };
 
   return (
     <main className="flex justify-center">
-      {/* <div className="w-7xl py-12 px-8">Balance: {totalBalance}</div> */}
+      <button
+        className="px-3 py-2 bg-red-500 mt-3 mr-3 hover:bg-red-300"
+        onClick={clearAccessToken}
+      >
+        Delete token
+      </button>
+      <button
+        className="px-3 py-2 bg-blue-500 mt-3 hover:bg-blue-300"
+        onClick={getBalance}
+      >
+        Get balance
+      </button>
+      <p className="block">Total balance {balance}</p>
     </main>
   );
 }

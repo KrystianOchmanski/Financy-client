@@ -37,18 +37,14 @@ export async function login(prevState: any, formData: FormData) {
   const { accessToken, refreshToken } = await response.json();
 
   const cookieStore = await cookies();
-  cookieStore.set("accessToken", accessToken, {
-    httpOnly: true,
-    secure: true,
-    sameSite: "lax",
-  });
+
   cookieStore.set("refreshToken", refreshToken, {
     httpOnly: true,
     secure: true,
-    sameSite: "lax",
+    sameSite: "strict",
   });
 
-  redirect("/dashboard");
+  return { accessToken };
 }
 
 export async function logout() {

@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Navbar from "./components/Navbar";
 import "./globals.css";
 import AuthLayout from "./components/AuthLayout";
 

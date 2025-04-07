@@ -9,13 +9,13 @@ export default async function middleware(req: NextRequest) {
   const isProtectedRoute = protectedRoutes.includes(path);
   const isPublicRoute = publicRoutes.includes(path);
 
-  const accessToken = (await cookies()).get("accessToken")?.value;
+  const refreshToken = (await cookies()).get("refreshToken")?.value;
 
-  if (isProtectedRoute && !accessToken) {
+  if (isProtectedRoute && !refreshToken) {
     return NextResponse.redirect(new URL("/login", req.nextUrl));
   }
 
-  if (isPublicRoute && accessToken) {
+  if (isPublicRoute && refreshToken) {
     return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
   }
 
