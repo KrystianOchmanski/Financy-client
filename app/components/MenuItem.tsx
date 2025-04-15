@@ -2,11 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-interface MenuItemProps {
-  href: string;
-  label: string;
-}
+import { MenuItemProps } from "../lib/definitions";
 
 export default function MenuItem({ href, label }: MenuItemProps) {
   const pathname = usePathname();
@@ -15,10 +11,8 @@ export default function MenuItem({ href, label }: MenuItemProps) {
   return (
     <Link
       href={href}
-      className={`px-3 py-2.5 mx-0.5 font-semibold text-xs lg:text-[16px] ${
-        isActive
-          ? "text-brand bg-[#F5F8FF] rounded-md"
-          : "text-gray-600 hover:bg-gray-100"
+      className={`px-3 py-2.5 mx-0.5 font-semibold text-xs lg:text-[16px] rounded-md ${
+        isActive ? "text-brand bg-[#F5F8FF]" : "text-gray-600 hover:bg-gray-100"
       }`}
     >
       {label}

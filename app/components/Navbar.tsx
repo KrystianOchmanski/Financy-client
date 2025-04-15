@@ -21,14 +21,14 @@ export default function Navbar() {
         <Link href="/" className="my-auto">
           <img src="/logo_full.png" alt="Logo" />
         </Link>
-        <menu className="my-auto">
+        <menu className="my-auto hidden md:block">
           <MenuItem href="/dashboard" label="Dashboard" />
           <MenuItem href="/transactions" label="Transactions" />
           <MenuItem href="/analytics" label="Analytics" />
           <MenuItem href="/accounts" label="Accounts" />
           <MenuItem href="/wallet" label="Wallet" />
         </menu>
-        <span className="ml-3 hidden sm:block">
+        <span className="ml-3 ">
           <button
             onClick={logout}
             type="button"

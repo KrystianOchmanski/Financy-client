@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { z } from "zod";
 
 export const loginSchema = z.object({
@@ -56,3 +57,35 @@ export const formatAmount = (amount: number) => {
     maximumFractionDigits: 2,
   }).format(amount);
 };
+
+export interface MenuItemProps {
+  href: string;
+  label: string;
+}
+
+export interface InfoCardProps {
+  title: string;
+  amount: number;
+  textColorClass?: string;
+}
+
+export interface Period {
+  startDate: string;
+  endDate: string;
+}
+
+export interface PeriodButton {
+  title: string;
+  period: Period;
+  selected: boolean;
+}
+
+export interface PeriodButtonsProps {
+  onPeriodSelect: (period: Period) => void;
+}
+
+export interface TransactionCardProps {
+  title: string;
+  endpoint: string;
+  period: Period;
+}
