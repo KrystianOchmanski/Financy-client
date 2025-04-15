@@ -2,9 +2,8 @@
 
 import { usePathname } from "next/navigation";
 import React from "react";
-import Navbar from "./Navbar";
 
-export default function AuthLayout({
+export default function PrivateElement({
   children,
 }: {
   children: React.ReactNode;
@@ -14,14 +13,7 @@ export default function AuthLayout({
   const publicPaths = ["/login", "/register"];
   const isPublicPath = publicPaths.includes(pathname);
 
-  if (isPublicPath) {
+  if (!isPublicPath) {
     return <>{children}</>;
   }
-
-  return (
-    <>
-      <Navbar />
-      {children}
-    </>
-  );
 }

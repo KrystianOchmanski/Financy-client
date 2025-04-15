@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import AuthLayout from "./components/AuthLayout";
+import PrivateElement from "./components/PrivateElement";
+import Navbar from "./components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-gray-100`}>
-        <AuthLayout>{children}</AuthLayout>
+        <PrivateElement>
+          <Navbar />
+        </PrivateElement>
+        <main className="flex justify-center">{children}</main>
       </body>
     </html>
   );

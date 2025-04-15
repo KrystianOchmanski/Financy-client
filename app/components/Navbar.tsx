@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import MenuItem from "./MenuItem";
 import { useAuth } from "../hooks/useAuth";

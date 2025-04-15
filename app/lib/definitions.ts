@@ -30,3 +30,29 @@ export const registerSchema = z.object({
       message: "use at least 1 different character.",
     }),
 });
+
+export interface Transaction {
+  id: number;
+  amount: number;
+  date: Date;
+  description: string;
+  type: number;
+  accountId: number;
+  accountName: string;
+  categoryId: number;
+  categoryName: string;
+}
+
+export interface Account {
+  id: number;
+  name: string;
+  balance: number;
+  transactions: Transaction[];
+}
+
+export const formatAmount = (amount: number) => {
+  return new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(amount);
+};
