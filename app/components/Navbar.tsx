@@ -16,16 +16,16 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white stroke-1 stroke-gray-100">
+    <nav className="bg-white stroke-1 stroke-gray-100 mb-12">
       <div className="container mx-auto flex justify-between lg:w-7xl py-4 px-8">
         <Link href="/" className="my-auto">
           <img src="/logo_full.png" alt="Logo" />
         </Link>
         <menu className="my-auto hidden md:block">
           <MenuItem href="/dashboard" label="Dashboard" />
-          <MenuItem href="/transactions" label="Transactions" />
-          <MenuItem href="/analytics" label="Analytics" />
-          <MenuItem href="/accounts" label="Accounts" />
+          <MenuItem href="/transaction" label="Transactions" />
+          <MenuItem href="/analytic" label="Analytics" />
+          <MenuItem href="/account" label="Accounts" />
           <MenuItem href="/wallet" label="Wallet" />
         </menu>
         <span className="ml-3 ">

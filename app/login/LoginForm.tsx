@@ -13,6 +13,10 @@ export default function LoginForm() {
   const router = useRouter();
 
   useEffect(() => {
+    router.prefetch("/dashboard");
+  }, []);
+
+  useEffect(() => {
     if (state?.accessToken) {
       // Saving token in memory and redirect
       setAccessToken(state.accessToken);

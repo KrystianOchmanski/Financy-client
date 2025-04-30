@@ -23,7 +23,7 @@ export default function RootLayout({
           <Navbar />
         </PrivateElement>
         <main className="flex justify-center">
-          <div className="w-7xl px-8 mt-12">{children}</div>
+          <div className="w-7xl px-8">{children}</div>
         </main>
       </body>
     </html>
