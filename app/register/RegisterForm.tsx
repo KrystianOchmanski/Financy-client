@@ -5,10 +5,11 @@ import { useFormStatus } from "react-dom";
 import { register } from "./action";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { SubmitButton } from "../components/SubmitButton";
 
 export default function RegisterForm() {
   const router = useRouter();
-  const [state, registerAction] = useActionState(register, undefined);
+  const [state, registerAction, pending] = useActionState(register, undefined);
 
   useEffect(() => {
     if (state?.redirect) {
@@ -70,7 +71,12 @@ export default function RegisterForm() {
             <p className="text-center text-green-600">{state.success}</p>
           )}
 
-          <SubmitButton />
+          <SubmitButton
+            pending={pending}
+            className="w-full bg-blue-500 text-white p-2 rounded flex justify-center items-center"
+          >
+            Register
+          </SubmitButton>
         </form>
         <Link
           href={"/login"}
@@ -80,19 +86,5 @@ export default function RegisterForm() {
         </Link>
       </div>
     </div>
-  );
-}
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-
-  return (
-    <button
-      type="submit"
-      disabled={pending}
-      className="w-full bg-blue-500 text-white p-2 rounded"
-    >
-      {pending ? "Submitting..." : "Register"}
-    </button>
   );
 }

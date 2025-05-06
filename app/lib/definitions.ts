@@ -88,3 +88,28 @@ export interface TransactionCardProps {
   endpoint: string;
   period: Period;
 }
+
+export const addAccountSchema = z.object({
+  name: z.string().trim().min(1, "Name is required"),
+  startingBalance: z.coerce
+    .number({
+      invalid_type_error: "Starting balance must be a number",
+    })
+    .gt(0, "Starting balance must be greater than 0"),
+});
+
+export interface AddAccountFormProps {
+  onClose: () => void;
+  onAccountAdded: () => void;
+}
+
+export interface SubmitButtonProps {
+  pending: boolean;
+  children: React.ReactNode;
+  className?: string;
+}
+
+export interface SpinnerProps {
+  size?: number;
+  className?: string;
+}

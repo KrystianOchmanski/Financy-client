@@ -1,14 +1,15 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
-import { useFormStatus } from "react-dom";
+import { useActionState, useEffect, useState } from "react";
 import { login } from "./actions";
 import Link from "next/link";
 import { useAuth } from "../hooks/useAuth";
 import { useRouter } from "next/navigation";
+import { SubmitButton } from "../components/SubmitButton";
 
 export default function LoginForm() {
-  const [state, loginAction] = useActionState(login, undefined);
+  const [state, loginAction, pending] = useActionState(login, undefined);
+  const [redirecting, setRedirecting] = useState<boolean>(false);
   const { setAccessToken } = useAuth();
   const router = useRouter();
 
@@ -20,6 +21,8 @@ export default function LoginForm() {
     if (state?.accessToken) {
       // Saving token in memory and redirect
       setAccessToken(state.accessToken);
+
+      setRedirecting(true);
       router.push("/dashboard");
     }
   }, [state?.accessToken]);
@@ -48,7 +51,12 @@ export default function LoginForm() {
             <p className="text-red-500">{state.errors.password}</p>
           )}
 
-          <SubmitButton />
+          <SubmitButton
+            pending={pending || redirecting}
+            className="w-full bg-blue-500 text-white p-2 rounded flex justify-center items-center"
+          >
+            Login
+          </SubmitButton>
         </form>
         <Link
           href={"/register"}
@@ -58,19 +66,5 @@ export default function LoginForm() {
         </Link>
       </div>
     </div>
-  );
-}
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-
-  return (
-    <button
-      type="submit"
-      disabled={pending}
-      className="w-full bg-blue-500 text-white p-2 rounded"
-    >
-      {pending ? "Submitting..." : "Login"}
-    </button>
   );
 }
