@@ -1,7 +1,6 @@
 "use client";
 
 import { useActionState, useEffect } from "react";
-import { useFormStatus } from "react-dom";
 import { register } from "./action";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -26,18 +25,20 @@ export default function RegisterForm() {
           <div className="mb-4">
             <label className="block mb-1 font-medium">Name</label>
             <input name="firstName" className="w-full p-2 border rounded" />
+
+            {state?.errors?.firstName && (
+              <p className="text-red-500">{state.errors.firstName}</p>
+            )}
           </div>
-          {state?.errors?.firstName && (
-            <p className="text-red-500">{state.errors.firstName}</p>
-          )}
 
           <div className="mb-4">
             <label className="block mb-1 font-medium">Email</label>
             <input name="email" className="w-full p-2 border rounded" />
+
+            {state?.errors?.email && (
+              <p className="text-red-500">{state.errors.email[0]}</p>
+            )}
           </div>
-          {state?.errors?.email && (
-            <p className="text-red-500">{state.errors.email[0]}</p>
-          )}
 
           <div className="mb-4">
             <label className="block mb-1 font-medium">Password</label>
@@ -46,18 +47,18 @@ export default function RegisterForm() {
               name="password"
               className="w-full p-2 border rounded"
             />
-          </div>
 
-          {state?.errors?.password && (
-            <>
-              <p className="text-red-500">Password must:</p>
-              {state.errors.password.map((error: string, index: number) => (
-                <p key={index} className="text-red-500">
-                  - {error}
-                </p>
-              ))}
-            </>
-          )}
+            {state?.errors?.password && (
+              <>
+                <p className="text-red-500">Password must:</p>
+                {state.errors.password.map((error: string, index: number) => (
+                  <p key={index} className="text-red-500">
+                    - {error}
+                  </p>
+                ))}
+              </>
+            )}
+          </div>
 
           {state?.errors?.general && (
             <div className="text-red-500">

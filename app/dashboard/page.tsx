@@ -11,7 +11,6 @@ export default function Dashboard() {
   const [period, setPeriod] = useState<Period | null>(null);
 
   const handlePeriodSelect = (period: Period) => {
-    console.log("Selected period:", period);
     setPeriod(period);
   };
 

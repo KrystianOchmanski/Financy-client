@@ -20,7 +20,6 @@ export async function addAccount(input: {
 
   try {
     const response = await api.post("/account", parseResult.data);
-    console.log(response);
 
     if (response.status != 201) {
       return {
@@ -38,6 +37,25 @@ export async function addAccount(input: {
         name: [""],
         startingBalance: ["Server error"],
       },
+    };
+  }
+}
+
+export async function deleteAccount(accountId: number) {
+  try {
+    const response = await api.delete(`/account/${accountId}`);
+
+    if (response.status != 204) {
+      return {
+        error: "Failed to delete an account",
+      };
+    }
+
+    return { success: true };
+  } catch (e: any) {
+    return {
+      success: false,
+      error: "Server error",
     };
   }
 }

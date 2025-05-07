@@ -34,10 +34,11 @@ export default function LoginForm() {
           <div className="mb-4">
             <label className="block mb-1 font-medium">Email</label>
             <input name="email" className="w-full p-2 border rounded" />
+
+            {state?.errors?.email && (
+              <p className="text-red-500">{state.errors.email}</p>
+            )}
           </div>
-          {state?.errors?.email && (
-            <p className="text-red-500">{state.errors.email}</p>
-          )}
 
           <div className="mb-4">
             <label className="block mb-1 font-medium">Password</label>
@@ -46,10 +47,11 @@ export default function LoginForm() {
               name="password"
               className="w-full p-2 border rounded"
             />
+
+            {state?.errors?.password && (
+              <p className="text-red-500">{state.errors.password}</p>
+            )}
           </div>
-          {state?.errors?.password && (
-            <p className="text-red-500">{state.errors.password}</p>
-          )}
 
           <SubmitButton
             pending={pending || redirecting}
