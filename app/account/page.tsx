@@ -2,9 +2,10 @@
 
 import useSWR from "swr";
 import { useState } from "react";
-import AddAccountForm from "./AddAccountForm";
 import { Account, formatAmount } from "../lib/definitions";
 import { fetcher } from "../lib/fetcher";
+import toast from "react-hot-toast";
+import AddAccountModalForm from "./AddAccountModalForm";
 
 export default function AccountPage() {
   const { data, error, isLoading, mutate } = useSWR<Account[]>(
@@ -18,6 +19,7 @@ export default function AccountPage() {
 
   return (
     <>
+    
       <button
         onClick={() => setShowModal(true)}
         className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
@@ -34,9 +36,12 @@ export default function AccountPage() {
       </ul>
 
       {showModal && (
-        <AddAccountForm
+        <AddAccountModalForm
           onClose={() => setShowModal(false)}
-          onAccountAdded={mutate}
+          onAccountAdded={() => {
+            mutate();
+            toast.success("Account added successfully!");
+          }}
         />
       )}
     </>

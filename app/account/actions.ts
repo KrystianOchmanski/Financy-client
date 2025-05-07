@@ -5,11 +5,11 @@ import { addAccountSchema } from "../lib/definitions";
 
 export async function addAccount(input: {
   name: string;
-  startingBalance: string;
+  startingBalance: number;
 }) {
   const parseResult = addAccountSchema.safeParse({
     name: input.name,
-    startingBalance: parseFloat(input.startingBalance),
+    startingBalance: input.startingBalance,
   });
 
   if (!parseResult.success) {
