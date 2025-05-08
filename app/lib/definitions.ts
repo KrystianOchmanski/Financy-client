@@ -68,6 +68,12 @@ export interface InfoCardProps {
   textColorClass?: string;
 }
 
+export interface ActionCardProps {
+  imgUrl: string;
+  title: string;
+  text: string;
+}
+
 export interface Period {
   startDate: string;
   endDate: string;

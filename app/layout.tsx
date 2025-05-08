@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import PrivateElement from "./components/PrivateElement";
-import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
+import Header from "./components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,12 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-gray-100`}>
-      <Toaster
-        position="bottom-right"
-        reverseOrder={false}
-      />
+        <Toaster position="bottom-right" reverseOrder={false} />
         <PrivateElement>
-          <Navbar />
+          <Header />
         </PrivateElement>
         <main className="flex justify-center">
           <div className="w-7xl px-8">{children}</div>

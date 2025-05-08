@@ -6,6 +6,7 @@ import HelloUser from "./HelloUser";
 import PeriodButtons from "./PeriodButtons";
 import TotalBalanceCard from "./TotalBalanceCard";
 import TransactionCard from "./TransactionCard";
+import ActionCard from "./ActionCard";
 
 export default function Dashboard() {
   const [period, setPeriod] = useState<Period | null>(null);
@@ -27,11 +28,26 @@ export default function Dashboard() {
           endpoint="/transaction/incomes"
           period={period || { startDate: "", endDate: "" }}
         />
-
         <TransactionCard
           title="Expenses"
           endpoint="/transaction/expenses"
           period={period || { startDate: "", endDate: "" }}
+        />
+
+        <ActionCard
+          imgUrl="add_income_icon.png"
+          title="Add income"
+          text="Create an income manually"
+        />
+        <ActionCard
+          imgUrl="add_expense_icon.png"
+          title="Add expense"
+          text="Create an expense manually"
+        />
+        <ActionCard
+          imgUrl="add_transfer_icon.png"
+          title="Transfer money"
+          text="Select the amount and make a transfer"
         />
       </div>
     </>

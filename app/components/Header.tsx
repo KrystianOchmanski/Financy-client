@@ -5,7 +5,7 @@ import MenuItem from "./MenuItem";
 import { useAuth } from "../hooks/useAuth";
 import { useRouter } from "next/navigation";
 
-export default function Navbar() {
+export default function Header() {
   const { clearAccessToken } = useAuth();
   const router = useRouter();
 
