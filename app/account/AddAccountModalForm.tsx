@@ -9,12 +9,14 @@ import toast from "react-hot-toast";
 type FormData = z.infer<typeof addAccountSchema>;
 
 export default function AddAccountModalForm({
+  isOpen,
   onClose,
   onAccountAdded,
 }: AddAccountFormProps) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(addAccountSchema),
@@ -28,12 +30,20 @@ export default function AddAccountModalForm({
     }
 
     toast.success("Account added successfully!");
+    reset();
     onAccountAdded();
     onClose();
   };
 
+  const handleClose = () => {
+    reset();
+    onClose();
+  };
+
+  if (!isOpen) return null;
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-transparent backdrop-blur-xs flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-lg">
         <h2 className="text-xl font-semibold mb-4">Add New Account</h2>
 
@@ -67,7 +77,7 @@ export default function AddAccountModalForm({
           <div className="mt-6 flex justify-end space-x-2">
             <button
               type="button"
-              onClick={onClose}
+              onClick={handleClose}
               className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition"
             >
               Cancel

@@ -99,8 +99,16 @@ export const addAccountSchema = z.object({
 });
 
 export interface AddAccountFormProps {
+  isOpen: boolean;
   onClose: () => void;
   onAccountAdded: () => void;
+}
+
+export interface ConfirmAccountDeleteModalProps {
+  isOpen: boolean;
+  account: Account | null;
+  onClose: () => void;
+  onConfirm: () => void;
 }
 
 export interface SubmitButtonProps {
