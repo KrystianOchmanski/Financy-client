@@ -20,7 +20,7 @@ export default function HelloUser() {
       {name ? (
         name
       ) : (
-        <span className="inline-block bg-gray-200 rounded-xl w-24 h-8 animate-pulse align-middle"></span>
+        <span className="inline-block bg-gray-100 rounded-xl w-24 h-8 animate-pulse align-middle"></span>
       )}
       !
     </h1>

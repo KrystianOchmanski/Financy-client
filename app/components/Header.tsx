@@ -16,7 +16,7 @@ export default function Header() {
   };
 
   return (
-    <nav className="bg-white stroke-1 stroke-gray-100 mb-12">
+    <nav className="bg-white border-b border-gray-100 mb-12">
       <div className="container mx-auto flex justify-between lg:w-7xl py-4 px-8">
         <Link href="/" className="my-auto">
           <img src="/logo_full.png" alt="Logo" />

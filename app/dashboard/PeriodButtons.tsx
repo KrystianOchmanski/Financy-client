@@ -18,7 +18,7 @@ export default function PeriodButtons({ onPeriodSelect }: Props) {
 
   const initialButtons: PeriodButton[] = [
     {
-      title: "This Month",
+      title: "This month",
       period: {
         startDate: format(startOfMonth(now), "yyyy-MM-dd"),
         endDate: format(endOfMonth(now), "yyyy-MM-dd"),
@@ -26,7 +26,7 @@ export default function PeriodButtons({ onPeriodSelect }: Props) {
       selected: true,
     },
     {
-      title: "Last Month",
+      title: "Last month",
       period: {
         startDate: format(startOfMonth(subMonths(now, 1)), "yyyy-MM-dd"),
         endDate: format(endOfMonth(subMonths(now, 1)), "yyyy-MM-dd"),
@@ -34,7 +34,7 @@ export default function PeriodButtons({ onPeriodSelect }: Props) {
       selected: false,
     },
     {
-      title: "This Year",
+      title: "This year",
       period: {
         startDate: format(startOfYear(now), "yyyy-MM-dd"),
         endDate: format(endOfYear(now), "yyyy-MM-dd"),
@@ -77,11 +77,15 @@ export default function PeriodButtons({ onPeriodSelect }: Props) {
         <button
           key={index}
           onClick={() => handleClick(index)}
-          className={`p-2 
-            ${button.selected ? "bg-blue-500 text-white" : "bg-gray-200"} 
+          className={`px-4 py-2 font-semibold text-[14px] border border-gray-100 shadow-xs cursor-pointer
+            ${
+              button.selected
+                ? "bg-blue-50 text-brand"
+                : "bg-white text-gray-600 hover:bg-gray-50"
+            } 
             ${index === 0 ? "rounded-l" : ""} 
             ${index === buttons.length - 1 ? "rounded-r" : ""} 
-            border border-gray-300`}
+            `}
         >
           {button.title}
         </button>
