@@ -44,11 +44,13 @@ export default function Dashboard() {
           title="Add expense"
           text="Create an expense manually"
         />
-        <ActionCard
-          imgUrl="add_transfer_icon.png"
-          title="Transfer money"
-          text="Select the amount and make a transfer"
-        />
+        <div className="opacity-50 pointer-events-none cursor-not-allowed select-none">
+          <ActionCard
+            imgUrl="add_transfer_icon.png"
+            title="Transfer money"
+            text="Select the amount and make a transfer"
+          />
+        </div>
       </div>
     </>
   );

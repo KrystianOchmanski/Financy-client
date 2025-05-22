@@ -28,8 +28,8 @@ export default function LoginForm() {
   }, [state?.accessToken]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-6 rounded-lg shadow-md w-96">
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="bg-white p-6 border border-gray-100 shadow-xs rounded-xl w-96">
         <form action={loginAction}>
           <div className="mb-4">
             <label className="block mb-1 font-medium">Email</label>
